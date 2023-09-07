@@ -31,11 +31,19 @@
 
         photographers.forEach((photographer) => {
             const photographerModel = photographerTemplate(photographer);
+            // Il y a photographerModel.getUserCardDOM() car
+            // getUserDOM est une fonction dans photographerModel
+            // donc on appelle le parent.enfant() ça transmet en même
+            // temps les datas returné de la fonction parent
             const userCardDOM = photographerModel.getUserCardDOM();
             photographersSection.appendChild(userCardDOM);
         });
     }
-
+/*
+    init() se lance en premier pour
+    charger les photographes -> getPhotographers
+    afficher les photographes -> displayData
+*/
     async function init() {
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
