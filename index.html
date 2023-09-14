@@ -11,20 +11,32 @@
     <title>Fisheye</title>
   </head>
   <body>
-    <header class="main-header">
-      <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
+    <header class="main-header" role="banner">
+      <a href="#" aria-current="page" aria-label="Navigation to homepage">
+        <img
+          src="assets/images/logo.png"
+          class="logo"
+          alt="Fisheye Home page"
+        />
+      </a>
+
       <h1>Nos photographes</h1>
     </header>
     <main id="main">
       <!-- Les profils sont rajouté dans la section ci-dessous -->
       <div class="photographer_section">
         <!-- <article class="user-card">
-          <a href="./photographer.html" class="user-card__link">
-            <header class="user-card__header">
+          <header class="user-card__header">
+            <a
+              href="./photographer.html"
+              class="user-card__link"
+              role="navigation"
+              aria-label=""
+            >
               <img class="user__card__portrait" src="" alt="" />
               <h2 class="user-card__name"></h2>
-            </header>
-          </a>
+            </a>
+          </header>
           <section class="user-card__paragraph">
             <p class="user-card__localization"></p>
             <p class="user-card__tagline"></p>
@@ -33,7 +45,14 @@
         </article> -->
       </div>
     </main>
-    <script src="scripts/templates/photographer.js"></script>
-    <script src="scripts/pages/index.js"></script>
+    <!-- <script src="scripts/templates/photographer.js"></script>
+    <script src="scripts/pages/index.js"></script> -->
+
+    <script src="scripts/api/Api.js"></script>
+    <script src="scripts/factories/PhotographersFactory.js"></script>
+    <script src="scripts/models/Photographer.js"></script>
+    <script src="scripts/templates/PhotographerCard.js"></script>
+
+    <script src="scripts/App.js"></script>
   </body>
 </html>
