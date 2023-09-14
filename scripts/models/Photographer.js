@@ -12,6 +12,7 @@ class Photographer {
     this._country = data.country
     this._tagline = data.tagline
     this._price = data.price
+    this._url = 'photographer.html'
   }
 
   get name() {
@@ -36,5 +37,9 @@ class Photographer {
 
   get price() {
     return this._price
+  }
+
+  get url() {
+    return `./${this._url}?user=${this._name}`
   }
 }
