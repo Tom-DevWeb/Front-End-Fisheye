@@ -18,9 +18,14 @@ class App {
     console.log(photographersData)
 
     //  --> Trie des Datas et formatage des datas photographes
-    const Photographers = photographersData.photographers.map(
-      (data) => new Photographer(data)
+    // const Photographers = photographersData.photographers.map(
+    //   (data) => new PhotographerProfil(data)
+    // )
+    const Photographers = new PhotographersFactory(
+      photographersData,
+      'photographers'
     )
+    console.log(Photographers)
 
     //  --> Création des card photographe et ajout au DOM
     Photographers.forEach((photographer) => {

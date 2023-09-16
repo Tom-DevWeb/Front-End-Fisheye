@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 
+// --> Contructor Patterns
 /* ----------------------------------------------------------------
     Class(modèle) d'un photographe avec modification des données
 ------------------------------------------------------------------- */
-class Photographer {
+class PhotographerProfil {
   constructor(data) {
-    console.log(data)
+    // console.log(data)
     this._name = data.name
     this._portrait = data.portrait
     this._city = data.city

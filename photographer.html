@@ -1,36 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Fisheye - photographe</title>
   </head>
   <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
+    <header class="main-header">
+      <a href="./index.html" aria-label="Navigation to homepage">
+        <img
+          src="assets/images/logo.png"
+          class="logo"
+          alt="Fisheye Home page"
+        />
+      </a>
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+      <!-- <header class="photograph-header">
+        <section class="photograph-header__text">
+          <h2 class="photograph-header__title">Mimi Keel</h2>
+          <p class="photograph-header__localization">London, UK</p>
+          <p class="photograph-header__desc">Voir le beau dans le quotidien</p>
+        </section>
+        <button
+          class="contact_button"
+          onclick="displayModal()"
+          aria-label="Ouvrir le formulaire de contact"
+        >
+          Contactez-moi
+        </button>
+        <img
+          src="./assets/photographers/MimiKeel.jpg"
+          alt="Portrait de Mimi Keel"
+          class="user-card__picture"
+        />
+      </header>
+      <div class="photographer-media">
+        <div class="media-filter">
+          <label for="filter-select" class="filter-label">Trier par</label>
+          <select name="filter-select" id="filter-select" class="filter-select">
+            <option class="filter-option" value="none">Aucun filtre</option>
+            <option class="filter-option" value="popularity">Popularité</option>
+            <option class="filter-option" value="title">Titre</option>
+            <option class="filter-option" value="date">Date</option>
+          </select>
+        </div>
+        <div class="media-container">
+          <div class="media-card">
+            <img
+              src="./assets/media/Mimi/Animals_Rainbow.jpg"
+              alt="Photo Animals"
+              class="media-card__img"
+            />
+            <video src=""></video>
+            <section class="media-card__text">
+              <h3 class="media-card__title">Arc-en-ciel</h3>
+              <p class="media-card__counterLike">10</p>
+              <label for="like" class="media-card__label">
+                <input type="checkbox" id="like" class="media-card__checkbox" />
+                <img
+                  src="./assets/icons/heart.svg"
+                  alt="Bouton pour ajouter ou enlver un like"
+                  role="button"
+                  class="media-card__imgLike"
+                />
+              </label>
+            </section>
+          </div>
+
+          <div class="media-card">
+            <img
+              src="./assets/media/Mimi/Animals_Rainbow.jpg"
+              alt="Photo Animals"
+              class="media-card__img"
+            />
+            <section class="media-card__text">
+              <h3 class="media-card__title">Arc-en-ciel</h3>
+              <p class="media-card__counterLike">10</p>
+              <label for="like" class="media-card__label">
+                <input type="checkbox" id="like" class="media-card__checkbox" />
+                <img
+                  src="./assets/icons/heart.svg"
+                  alt="Bouton pour ajouter ou enlver un like"
+                  role="button"
+                  class="media-card__imgLike"
+                />
+              </label>
+            </section>
+          </div>
+        </div>
+      </div> -->
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
+    <div id="contact_modal" class="contact-modal">
+      <div class="modal">
+        <header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img
+            src="assets/icons/close.svg"
+            onclick="closeModal()"
+            alt="Bouton pour fermer la modale"
+          />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
+        <form>
+          <div>
+            <label>Prénom</label>
+            <input />
+          </div>
           <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+        </form>
+      </div>
+    </div>
+    <script src="./scripts/api/Api.js"></script>
+    <script src="./scripts/factories/PhotographersFactory.js"></script>
+    <script src="./scripts/models/PhotographerProfil.js"></script>
+    <script src="./scripts/models/PhotographerMedia.js"></script>
+    <script src="./scripts/db/PhotographerData.js"></script>
+    <script src="./scripts/templates/PhotographerHeader.js"></script>
+    <script src="./scripts/templates/PhotographerMediaCard.js"></script>
+    <script src="./scripts/templates/MediaFilter.js"></script>
+    <script src="./scripts/templates/PhotographerInfo.js"></script>
+    <script src="./scripts/utils/contactForm.js"></script>
+
     <script src="./scripts/pages/photographer.js"></script>
     <script src="./scripts/utils/contactForm.js"></script>
   </body>
