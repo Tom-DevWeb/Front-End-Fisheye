@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 //Mettre le code JavaScript lié à la page photographer.html
 
@@ -37,73 +38,72 @@ class photographer {
     // Création de la section filtres
     // ------------------------------------------------------------------------------
     this.$addDom.appendChild(this.$photographerMedia)
-    const $addPhotographerMedia = document.querySelector('.photographer-media')
 
-    const createMediaFilter = new MediaFilter()
-    $addPhotographerMedia.appendChild(createMediaFilter.createMediaFilter())
+    const filters = new MediaFilter()
 
-    const customSelect = document.querySelector('.filter-media')
-    const selectBtn = document.querySelector('.filter-button')
-
-    // add a click event to select button
-    selectBtn.addEventListener('click', () => {
-      // add/remove active class on the container element
-      customSelect.classList.toggle('active')
-      // update the aria-expanded attribute based on the current state
-      selectBtn.setAttribute(
-        'aria-expanded',
-        selectBtn.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
-      )
-    })
-    const selectedValue = document.querySelector('.filter-selected')
-    const optionsList = document.querySelectorAll('.filter-dropdown li')
-    optionsList.forEach((option) => {
-      function handler(e) {
-        // Click Events
-        if (e.type === 'click' && e.clientX !== 0 && e.clientY !== 0) {
-          selectedValue.textContent = this.children[1].textContent
-          customSelect.classList.remove('active')
-        }
-        // Key Events
-        if (e.key === 'Enter') {
-          selectedValue.textContent = this.textContent
-          customSelect.classList.remove('active')
-        }
-      }
-
-      option.addEventListener('keyup', handler)
-      option.addEventListener('click', handler)
-    })
-
+    // ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------
     // Création de la liste des media -> photographerAllData.mediaPhotographer
     // ------------------------------------------------------------------------------
+    //  --> Création du container
+    const $addPhotographerMedia = document.querySelector('.photographer-media')
+    $addPhotographerMedia.appendChild(this.$mediaContainer)
+
+    //  --> Structure mes données
     const photographerMedia = photographerAllData.mediaPhotographer.map(
       (e) => new PhotographerMedia(e)
     )
-    console.log(photographerMedia)
-    $addPhotographerMedia.appendChild(this.$mediaContainer)
-    const $addMediaContainer = document.querySelector('.media-container')
+    const initMedia = new PhotographerMediaCard(photographerMedia)
+    initMedia.createAllMedia()
 
-    let totalLikes = 0
-    let likeId = 0
-    photographerMedia.forEach((element) => {
-      const Template = new PhotographerMediaCard(element, likeId)
-      $addMediaContainer.appendChild(Template.createMedia())
+    // const $addMediaContainer = document.querySelector('.media-container')
+    // let totalLikes = 0
+    // let likeId = 0
+    // await photographerMedia.forEach((element) => {
+    //   const Template = new PhotographerMediaCard(element, likeId)
+    //   $addMediaContainer.appendChild(Template.createMedia())
 
-      likeId++
-      totalLikes += element.likes
+    //   likeId++
+    //   totalLikes += element.likes
+    //   console.log(Template)
+    // })
+
+    // this.setAllMedia(photographerMedia)
+
+    // const filteredMedia = FilterSelected(photographerMedia)
+    // this.updateAllMedia(filteredMedia)
+    // --> test
+    const testReset = document.querySelector('.photograph-header__title')
+    testReset.addEventListener('click', () => {
+      initMedia.resetMedia()
     })
+
     // ------------------------------------------------------------------------------
     // Création pour total likes et prix
     // ------------------------------------------------------------------------------
 
     const createInfo = new PhotographerInfo(
-      totalLikes,
+      initMedia.totalLikes,
       photographerProfil.price
     )
     this.$addDom.appendChild(createInfo.createInfo())
+
+    //
+    const filteredMedia = FilterSelected(photographerMedia)
+    const changeFilter = document.querySelector('.user-card__picture')
+    changeFilter.addEventListener('click', () => {
+      // initMedia._photographer = filteredMedia
+      initMedia.updateMedia(filteredMedia)
+      const newdataTest = new PhotographerMediaCard(filteredMedia)
+      console.log(newdataTest.photographer)
+    })
   }
+
+  // ------------------------------------------------------------------------------
+  // Changement après filtre
+  // ------------------------------------------------------------------------------
 }
 
 const run = new photographer()

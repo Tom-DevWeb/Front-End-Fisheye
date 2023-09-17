@@ -155,17 +155,18 @@
   box-sizing: border-box;
 }
 
-.filter-dropdown label:hover,
-.filter-dropdown input:checked ~ label {
+.filter-dropdown label:hover {
   border: 0.2rem solid black;
   border-radius: 6px;
 }
 
-.filter-dropdown input:focus ~ label {
-  border: 0.2rem solid black;
+.filter-dropdown label:focus-visible {
+  border: none;
+  /* border: 0.2rem solid red; */
   border-radius: 6px;
 }
 .filter-dropdown input[type='radio'] {
+  display: none;
   position: absolute;
   left: 0;
   opacity: 0;
