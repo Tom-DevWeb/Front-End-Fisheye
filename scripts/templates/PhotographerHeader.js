@@ -23,8 +23,8 @@ class PhotographerHeader {
             <p class="photograph-header__desc">${this._photographer.tagline}</p>
         </section>
         <button
-            class="contact_button"
-            onclick="displayModal()"
+            class="contact-button"
+            onclick="contactForm.displayModal()"
             aria-label="Ouvrir le formulaire de contact"
         >
             Contactez-moi

@@ -69,6 +69,12 @@ class photographer {
     InitData.update = initMedia
 
     // ------------------------------------------------------------------------------
+    // Gestion du modal de contact
+    // ------------------------------------------------------------------------------
+    const contactForm = new ContactForm(photographerProfil._name)
+    contactForm.attachWindow()
+
+    // ------------------------------------------------------------------------------
     // Création pour total likes et prix
     // ------------------------------------------------------------------------------
 

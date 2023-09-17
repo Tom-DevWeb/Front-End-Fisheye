@@ -36,7 +36,7 @@
   font-size: 1.125rem;
 }
 
-.contact_button {
+.contact-button {
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -282,9 +282,47 @@
   top: 0;
   right: 0;
 }
+.modal-header {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.modal-title {
+  font-size: 4rem;
+  font-weight: 400;
+  text-align: left;
+  flex: 2;
+}
+.modal-close {
+  width: 4rem;
+  height: 4rem;
+  background: none;
+  border: none;
+  background-image: url(../assets/icons/close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.modal-close:hover {
+  border: 2px solid white;
+  border-radius: 0.25rem;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 .modal {
   border-radius: 5px;
   background-color: #db8876;
+  min-width: 800px;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -292,36 +330,20 @@
   justify-content: space-between;
   padding: 35px;
   margin: 10% auto;
+  gap: 1.25rem;
 }
 
-.modal header {
-  justify-content: space-between;
-  width: 100%;
-}
-
-.modal header img {
-  cursor: pointer;
-}
-
-.modal header h2 {
-  font-size: 64px;
-  font-weight: normal;
-  text-align: center;
-}
-
-form {
+.modal-form {
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
 }
 
-form label {
-  color: #312e2e;
-  font-size: 36px;
-}
-
-form div {
+.modal-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -329,9 +351,45 @@ form div {
   margin-bottom: 26px;
 }
 
-form input {
+.modal-label {
+  color: #312e2e;
+  font-size: 2.25rem;
+  font-weight: 400;
+}
+
+.modal-input {
   width: 100%;
-  height: 68px;
+  height: 4.25rem;
   border: none;
   border-radius: 5px;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-message {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.modal-textarea {
+  width: 100%;
+  max-width: 100%;
+  height: 10.625rem;
+  box-sizing: border-box;
+  resize: none;
+  font-size: 1rem;
+}
+
+.modal-submit {
+  border: none;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+  border-radius: 0.3125rem;
+  background: #901c1c;
+  padding: 1.44rem 3.19rem;
+}
+.modal-submit:hover {
+  text-decoration: underline;
 }
