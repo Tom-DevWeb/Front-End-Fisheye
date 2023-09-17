@@ -1,28 +1,34 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-//Mettre le code JavaScript lié à la page photographer.html
+// ------------------------------------------------------------------------------
+// Code de la page phtographer.html
+// ------------------------------------------------------------------------------
 
 class photographer {
   constructor() {
-    //  --> Envoie de l'URL avec nouvelle instance
+    //  --> Envoie de l'URL pour après récupérer les datas
     this.photographersApi = new PhotographerApi('./data/photographers.json')
 
     //  --> Séléction de la class ou ajouter des éléments
     this.$addDom = document.querySelector('#main')
 
+    //  --> Ajoute la section contenant Filtre + Medias
     this.$photographerMedia = document.createElement('div')
     this.$photographerMedia.classList.add('photographer-media')
 
+    //  --> Ajoute la section contenant Medias
     this.$mediaContainer = document.createElement('div')
     this.$mediaContainer.classList.add('media-container')
   }
 
   async main() {
-    //  --> Récupération des datas
+    // ------------------------------------------------------------------------------
+    // Récupére datas -> media et photographers
+    // ------------------------------------------------------------------------------
+    // --> Récupére les datas de l'instance crée plus haut avec "url".json
     const photographersData = await this.photographersApi.get()
-    console.log(photographersData)
 
-    //  --> Cible le photographe pour récupérer juste ses données
+    //  --> SearchParams récupère seulement data du photographe Singleton pattern
     const photographerAllData = await new PhotographerData(photographersData)
 
     // ------------------------------------------------------------------------------
@@ -37,48 +43,30 @@ class photographer {
     // ------------------------------------------------------------------------------
     // Création de la section filtres
     // ------------------------------------------------------------------------------
+    //  --> On ajoute div photographer-media
     this.$addDom.appendChild(this.$photographerMedia)
 
-    const filters = new MediaFilter()
+    //  --> On ajoute le bandeau filtre
+    new MediaFilter()
 
-    // ------------------------------------------------------------------------------
-    // ------------------------------------------------------------------------------
-    // ------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------
     // Création de la liste des media -> photographerAllData.mediaPhotographer
     // ------------------------------------------------------------------------------
-    //  --> Création du container
-    const $addPhotographerMedia = document.querySelector('.photographer-media')
-    $addPhotographerMedia.appendChild(this.$mediaContainer)
+    //  --> On ajoute div media-container
+    this.$photographerMedia.appendChild(this.$mediaContainer)
 
-    //  --> Structure mes données
+    //  --> Structure mes données medias
     const photographerMedia = photographerAllData.mediaPhotographer.map(
       (e) => new PhotographerMedia(e)
     )
+
+    // Création intsance pour crée mes card media et récupérer infos
     const initMedia = new PhotographerMediaCard(photographerMedia)
     initMedia.createAllMedia()
 
-    // const $addMediaContainer = document.querySelector('.media-container')
-    // let totalLikes = 0
-    // let likeId = 0
-    // await photographerMedia.forEach((element) => {
-    //   const Template = new PhotographerMediaCard(element, likeId)
-    //   $addMediaContainer.appendChild(Template.createMedia())
-
-    //   likeId++
-    //   totalLikes += element.likes
-    //   console.log(Template)
-    // })
-
-    // this.setAllMedia(photographerMedia)
-
-    // const filteredMedia = FilterSelected(photographerMedia)
-    // this.updateAllMedia(filteredMedia)
-    // --> test
-    const testReset = document.querySelector('.photograph-header__title')
-    testReset.addEventListener('click', () => {
-      initMedia.resetMedia()
-    })
+    // je transfére mes donnees au filtre
+    InitData.data = photographerMedia
+    InitData.update = initMedia
 
     // ------------------------------------------------------------------------------
     // Création pour total likes et prix
@@ -89,21 +77,7 @@ class photographer {
       photographerProfil.price
     )
     this.$addDom.appendChild(createInfo.createInfo())
-
-    //
-    const filteredMedia = FilterSelected(photographerMedia)
-    const changeFilter = document.querySelector('.user-card__picture')
-    changeFilter.addEventListener('click', () => {
-      // initMedia._photographer = filteredMedia
-      initMedia.updateMedia(filteredMedia)
-      const newdataTest = new PhotographerMediaCard(filteredMedia)
-      console.log(newdataTest.photographer)
-    })
   }
-
-  // ------------------------------------------------------------------------------
-  // Changement après filtre
-  // ------------------------------------------------------------------------------
 }
 
 const run = new photographer()

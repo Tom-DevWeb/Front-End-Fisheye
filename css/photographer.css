@@ -54,7 +54,7 @@
 --------------------------------------------------------- */
 
 .photographer-media {
-  margin-top: 1.25rem;
+  margin: 1.25rem 0 10rem;
   display: flex;
   flex-direction: column;
   gap: 3.62rem;
@@ -131,6 +131,7 @@
   overflow-y: auto;
   visibility: hidden;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .filter-dropdown:focus-within {
