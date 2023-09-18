@@ -75,6 +75,13 @@ class photographer {
     contactForm.attachWindow()
 
     // ------------------------------------------------------------------------------
+    // Gestion du modal de contact
+    // ------------------------------------------------------------------------------
+    Lightbox.data = photographerMedia
+    const lightbox = new Lightbox()
+    lightbox.attachWindow()
+
+    // ------------------------------------------------------------------------------
     // Création pour total likes et prix
     // ------------------------------------------------------------------------------
 

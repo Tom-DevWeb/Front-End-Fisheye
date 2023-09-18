@@ -112,8 +112,8 @@ class ContactForm {
     const $modalDom = document.querySelector('.contact-modal')
     $modalDom.setAttribute('aria-hidden', 'true')
 
-    const openBtn = document.querySelector('.contact-button')
-    openBtn.focus()
+    // const openBtn = document.querySelector('.contact-button')
+    // openBtn.focus()
   }
 
   getDataInput() {

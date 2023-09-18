@@ -35,10 +35,15 @@ class PhotographerMediaCard {
             src="${photographer.picture}"
             alt="Photo ${photographer.title}"
             class="media-card__img"
+            tabindex="0"
+            onclick="lightbox.listenerLightbox(this)"
             />`
             : `<video 
             src="${photographer.picture}" 
-            class="media-card__img" autoplay>
+            tabindex="0"
+            class="media-card__img"
+            onclick="lightbox.listenerLightbox(this)"
+             autoplay>
               Votre navigateur ne permet pas de lire les vidéos.
               Mais vous pouvez toujours
               <a href="${photographer.picture}">la télécharger</a> !
