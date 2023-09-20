@@ -27,7 +27,7 @@ html {
 body {
   font-family: 'DM Sans', sans-serif;
   margin: 0;
-  padding: 0 100px;
+  /* padding: 0 100px; */
 }
 
 h1,
@@ -49,24 +49,27 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
+
+  height: 8rem;
 }
 
 h1 {
   color: #901c1c;
+  text-align: center;
   /* margin-right: 100px; */
 }
 
 .logo {
-  height: 50px;
+  height: 3rem;
   /* margin-left: 100px; */
 }
 
 .photographer_section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
-  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem 2rem;
+  margin-top: 5rem;
 }
 
 .user-card {
@@ -74,10 +77,10 @@ h1 {
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  justify-self: center;
-  margin-bottom: 8rem;
+  min-width: 20rem;
+  /* min-height: 21rem; */
+  flex: 1 0 29%;
 }
 
 .user-card__header {
@@ -97,6 +100,10 @@ h1 {
   color: #d3573c;
   font-size: 2.25rem;
   white-space: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* width: 90%; */
 }
 
 .user-card__picture {
@@ -126,4 +133,25 @@ h1 {
 .user-card__price {
   font-size: 0.5625rem;
   color: #757575;
+}
+
+/* @media screen and (max-width: 1223.98px) {
+  .photographer_section {
+    grid-template-columns: 1fr 1fr;
+  }
+} */
+
+@media screen and (max-width: 767.98px) {
+  html {
+    font-size: 75%;
+  }
+  body {
+    padding: 0 1.25rem;
+  }
+  .main-header {
+    margin-top: 2rem;
+    flex-direction: column;
+    align-items: center;
+    height: 8rem;
+  }
 }

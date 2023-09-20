@@ -13,6 +13,7 @@
   padding: 0 3.13rem;
   display: flex;
   align-items: center;
+  gap: 2rem;
   justify-content: space-between;
 }
 
@@ -37,12 +38,12 @@
 }
 
 .contact-button {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   color: white;
-  padding: 11px;
-  width: 170px;
-  height: 70px;
+  padding: 0.75rem;
+  width: 10rem;
+  height: 4.25rem;
   border: none;
   background-color: #901c1c;
   border-radius: 5px;
@@ -193,8 +194,10 @@
 .media-card {
   display: flex;
   flex-direction: column;
+
   gap: 0.63rem;
-  max-width: 21.875rem;
+  min-width: 21.875rem;
+  min-height: 18.75rem;
   flex: 1 0 25%;
 }
 
@@ -517,4 +520,68 @@
 }
 .no-scroll {
   overflow: hidden;
+}
+@media screen and (max-width: 2024px) {
+  body {
+    padding: 0 6rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  body {
+    padding: 0 5rem;
+  }
+  .photograph-header {
+    height: auto;
+    /* margin: 0 100px; */
+    padding: 3.13rem;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photograph-header__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .photograph-header__title {
+    color: #d3573c;
+    font-size: 4rem;
+  }
+
+  .photograph-header__localization {
+    font-size: 1.5rem;
+    color: #901c1c;
+  }
+
+  .photograph-header__desc {
+    color: #525252;
+    font-size: 1.125rem;
+  }
+
+  .contact-button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901c1c;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  html {
+    font-size: 75%;
+  }
+  .main-header {
+    margin-top: 2rem;
+    flex-direction: column;
+    align-items: center;
+    height: 8rem;
+  }
 }

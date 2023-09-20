@@ -40,7 +40,9 @@ class photographer {
     const createHeaderPhotographer = new PhotographerHeader(photographerProfil)
     this.$addDom.appendChild(createHeaderPhotographer.createHeader())
 
-    //
+    // ------------------------------------------------------------------------------
+    // Création pour total likes et prix
+    // ------------------------------------------------------------------------------
     PhotographerInfo.price = photographerProfil.price
     const createInfo = new PhotographerInfo()
     this.$addDom.appendChild(createInfo.createInfo())
@@ -84,14 +86,6 @@ class photographer {
     Lightbox.data = photographerMedia
     const lightbox = new Lightbox()
     lightbox.attachWindow()
-
-    // ------------------------------------------------------------------------------
-    // Création pour total likes et prix
-    // ------------------------------------------------------------------------------
-
-    // PhotographerInfo.price = photographerProfil.price
-    // const createInfo = new PhotographerInfo(initMedia.totalLikes)
-    // this.$addDom.appendChild(createInfo.createInfo())
   }
 }
 
