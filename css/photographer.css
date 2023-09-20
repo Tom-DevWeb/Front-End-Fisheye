@@ -238,9 +238,24 @@
   margin-left: 0.5rem;
 }
 
-.media-card__imgLike {
+.media-card__btnLike {
+  border: none;
+  background: none;
   height: 1.315rem;
-  width: auto;
+  width: 1.315rem;
+  cursor: pointer;
+  background-image: url(../assets/icons/heart-red.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.media-card__checkbox:checked ~ .media-card__btnLike {
+  background-image: url(../assets/icons/heart.svg);
+  /* transition: all 0.5s ease-in-out; */
+}
+
+.media-card__btnLike svg {
+  width: 100%;
+  height: 100%;
 }
 /* ------------------------------------------------------
     Info -> Like et prix

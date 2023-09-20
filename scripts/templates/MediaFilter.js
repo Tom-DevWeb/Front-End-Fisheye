@@ -21,7 +21,7 @@ class MediaFilter {
         <button 
             class="filter-button"
             role="combobox"
-            aria-labelledby="select button"
+            aria-labelledby="filter-dropdown"
             aria-haspopup="listbox"
             aria-expanded="false"
             aria-controls="filter-dropdown">

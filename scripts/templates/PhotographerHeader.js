@@ -26,6 +26,7 @@ class PhotographerHeader {
             class="contact-button"
             onclick="contactForm.displayModal()"
             aria-label="Ouvrir le formulaire de contact"
+            tabindex="0"
         >
             Contactez-moi
         </button>

@@ -7,6 +7,9 @@ class Lightbox {
     this.$wrapper = document.createElement('div')
     this.$wrapper.classList.add('lightbox-container')
 
+    // Enregistrez la fonction de gestionnaire d'événements dans une propriété
+    this.keyUpHandler = this.handleKeyPress.bind(this)
+
     this._index = 0
     this._indexLenght = 0
   }
@@ -45,15 +48,7 @@ class Lightbox {
 
     this.$mainDom.setAttribute('aria-hidden', 'true')
 
-    const nextBtn = document.querySelector('.lightbox-next')
-    nextBtn.focus()
-
     this.$body.classList.add('no-scroll')
-
-    //  --> Cette ligne lie la méthode handleKeyDown à l'instance actuelle de la classe Lightbox
-    // --> Evite que handleKeyDown perde son contexte
-    this.handleKeyDown = this.handleKeyDown.bind(this)
-    document.addEventListener('keydown', this.handleKeyDown)
   }
 
   closeLightbox() {
@@ -61,8 +56,6 @@ class Lightbox {
     // $lightbox.style.display = 'none'
     if ($lightbox) {
       $lightbox.remove()
-      //   --> supprime l'écouteur d'événements qui a été ajouté précédemment car modal fermé
-      document.removeEventListener('keydown', this.handleKeyDown)
     } else {
       console.error('L élément n a pas été trouvé.')
     }
@@ -71,9 +64,12 @@ class Lightbox {
     this.$body.classList.remove('no-scroll')
 
     this.$mainDom.setAttribute('aria-hidden', 'false')
+
+    // --> Enlève les event key aux éléments
+    document.removeEventListener('keyup', this.keyUpHandler)
   }
 
-  handleKeyDown(e) {
+  handleKeyPress(e) {
     // ==> Gère la fermeture du modal avec la touche echap
     const $lightbox = document.querySelector('.lightbox-container')
     if (
@@ -81,6 +77,13 @@ class Lightbox {
       e.key === 'Escape'
     ) {
       this.closeLightbox()
+    } else if (e.key === 'ArrowRight') {
+      this.nextMedia()
+    } else if (e.key === 'ArrowLeft') {
+      this.prevMedia()
+    } else {
+      //  --> Désactive les événement pour les autres touches
+      e.preventDefault()
     }
   }
 
@@ -100,20 +103,26 @@ class Lightbox {
     this._indexLenght = allMediaArray.length
     this._index = searchIndex
     this.createLightbox(searchIndex)
+
+    // --> Rattache les event key aux éléments
+    document.addEventListener('keyup', this.keyUpHandler)
   }
 
   prevMedia() {
+    const prevBtn = document.querySelector('.lightbox-prev')
+    prevBtn.focus()
     this._index = this._index - 1
     if (this._index < 0) {
       this._index = this._indexLenght - 1
     }
-    console.log(this._index)
     setTimeout(() => {
       this.createLightbox(this._index)
     }, 100)
   }
 
   nextMedia() {
+    const nextBtn = document.querySelector('.lightbox-next')
+    nextBtn.focus()
     this._index = this._index + 1
     if (this._index > this._indexLenght - 1) {
       this._index = 0
