@@ -343,8 +343,8 @@
 .modal {
   border-radius: 5px;
   background-color: #db8876;
-  min-width: 800px;
-  width: 50%;
+  max-width: 800px;
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -352,6 +352,7 @@
   padding: 35px;
   margin: 10% auto;
   gap: 1.25rem;
+  box-sizing: border-box;
 }
 
 .modal-form {
@@ -585,5 +586,11 @@
     flex-direction: column;
     align-items: center;
     height: 8rem;
+  }
+  .modal-title {
+    font-size: 3rem;
+  }
+  .modal-label {
+    font-size: 2rem;
   }
 }

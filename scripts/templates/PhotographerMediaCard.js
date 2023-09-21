@@ -59,8 +59,8 @@ class PhotographerMediaCard {
         <section class="media-card__text">
           <h3 class="media-card__title">${photographer.title}</h3>
           <p class="media-card__counterLike" 
-            id="nbrLike${this._likeId}" tabindex="0">
-              ${photographer.likes} <des class="sr-only">like</desc>
+            id="nbrLike${this._likeId}">
+              ${photographer.likes} 
           </p>
           <label for="like${this._likeId}" 
           class="media-card__label" 
