@@ -87,10 +87,10 @@ class Lightbox {
     ) {
       this.closeLightbox()
       e.preventDefault()
-    } else if (e.key === 'ArrowRight') {
+    } else if (e.key === 'ArrowRight' || e.keyCode === 39) {
       this.nextMedia()
       e.preventDefault()
-    } else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowLeft' || e.keyCode === 37) {
       this.prevMedia()
       e.preventDefault()
     } else if (e.key === 'Tab' || e.keyCode === 9) {

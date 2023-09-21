@@ -47,6 +47,7 @@ class PhotographerMediaCard {
             src="${photographer.picture}" 
             tabindex="0"
             class="media-card__img"
+            alt="Vidéo ${photographer.title}"
             onclick="lightbox.listenerLightbox(this)"
              autoplay>
               Votre navigateur ne permet pas de lire les vidéos.
@@ -57,9 +58,10 @@ class PhotographerMediaCard {
         
         <section class="media-card__text">
           <h3 class="media-card__title">${photographer.title}</h3>
-          <p class="media-card__counterLike" id="nbrLike${this._likeId}">${
-      photographer.likes
-    }</p>
+          <p class="media-card__counterLike" 
+            id="nbrLike${this._likeId}" tabindex="0">
+              ${photographer.likes} <des class="sr-only">like</desc>
+          </p>
           <label for="like${this._likeId}" 
           class="media-card__label" 
           tabindex="0"
