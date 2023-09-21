@@ -12,7 +12,7 @@ class ContactForm {
     this.$mainDom = document.querySelector('main')
 
     this.createForm()
-    this.closeModal()
+    // this.closeModal()
   }
 
   attachWindow() {
@@ -22,10 +22,10 @@ class ContactForm {
   createForm() {
     const modalCreate = `
     
-      <div class="modal">
+      <div class="modal" role="document">
         <header class="modal-header">
           <h2 id="modalTitle" class="modal-title">Contactez-moi <br> ${this._userData}</h2>
-          <button onclick="contactForm.closeModal()" class="modal-close">
+          <button onclick="contactForm.closeModal()" class="modal-close" aria-label="Fermer">
             <span class="sr-only">Fermer le formulaire de contact</span>
           </button>
         </header>
@@ -79,17 +79,23 @@ class ContactForm {
     this.$wrapper.innerHTML = modalCreate
     this.$wrapper.id = 'contact-modal'
     this.$wrapper.role = 'dialog'
-    this.$wrapper.setAttribute('aria-describedby', 'modalTitle')
+    this.$wrapper.setAttribute('aria-labelledby', 'modalTitle')
+    this.$wrapper.setAttribute('aria-label', 'Modal de contacte')
+    this.$wrapper.setAttribute('tabindex', '-1')
+    this.$wrapper.setAttribute('aria-hidden', 'true')
+    this.$wrapper.style.display = 'none'
+
     this.$body.appendChild(this.$wrapper)
   }
 
   displayModal() {
-    const modal = document.getElementById('contact-modal')
-    modal.style.display = 'block'
+    const $modal = document.getElementById('contact-modal')
+    $modal.style.display = 'block'
 
-    this.$mainDom.setAttribute('aria-hidden', 'true')
+    this.$insertDom.setAttribute('aria-hidden', 'true')
     const $modalDom = document.querySelector('.contact-modal')
     $modalDom.setAttribute('aria-hidden', 'false')
+    // $modalDom.setAttribute('aria-modal', 'true')
 
     const closeBtn = document.querySelector('.modal-close')
     closeBtn.focus()
@@ -102,18 +108,58 @@ class ContactForm {
         classThis.closeModal()
       }
     })
+
+    this.focusModal($modal)
+  }
+
+  focusModal($modal) {
+    //  --> Fait une NodeList des éléments HTML
+    const focusElements = $modal.querySelectorAll('button, input')
+
+    // --> Transformation NodeList en Array pour manipuler (utiliser méthodes et propriété "map, push...")
+    // --> J'aurai pu utiliser [...focusElements] au lieu de Array.from
+    const focusElementsArray = Array.from(focusElements)
+
+    const firstFocusElement = focusElementsArray[0]
+    const lastFocusElement = focusElementsArray[focusElementsArray.length - 1]
+
+    $modal.addEventListener('keydown', function (e) {
+      const isTabPressed = e.key === 'Tab' || e.keyCode === 9
+
+      if (!isTabPressed) {
+        return
+      }
+
+      if (e.shiftKey) {
+        // Si Maj + Tab, déplacez le focus de l'élément actuel vers le dernier élément focusable
+        //  --> document.activeElement est l'élément avec le focus à linstant T
+        if (document.activeElement === firstFocusElement) {
+          e.preventDefault()
+          lastFocusElement.focus()
+        }
+      } else {
+        // Sinon, déplacez le focus de l'élément actuel vers le premier élément focusable
+        //  --> document.activeElement est l'élément avec le focus à linstant T
+        if (document.activeElement === lastFocusElement) {
+          e.preventDefault()
+          firstFocusElement.focus()
+        }
+      }
+    })
   }
 
   closeModal() {
     const modal = document.getElementById('contact-modal')
     modal.style.display = 'none'
+    // modal.close()
 
-    this.$mainDom.setAttribute('aria-hidden', 'false')
+    this.$insertDom.setAttribute('aria-hidden', 'false')
     const $modalDom = document.querySelector('.contact-modal')
     $modalDom.setAttribute('aria-hidden', 'true')
+    // $modalDom.setAttribute('aria-modal', 'false')
 
-    // const openBtn = document.querySelector('.contact-button')
-    // openBtn.focus()
+    const openBtn = document.querySelector('.contact-button')
+    openBtn.focus()
   }
 
   getDataInput() {

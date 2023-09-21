@@ -44,6 +44,10 @@ a {
   color: currentColor;
 }
 
+:focus {
+  outline: 3px solid #901c1c;
+}
+
 .main-header {
   display: flex;
   flex-direction: row;
@@ -69,7 +73,7 @@ h1 {
   justify-content: center;
   flex-wrap: wrap;
   gap: 3rem 2rem;
-  margin-top: 5rem;
+  margin: 5rem 0;
 }
 
 .user-card {
@@ -80,6 +84,7 @@ h1 {
   align-items: center;
   min-width: 20rem;
   /* min-height: 21rem; */
+  /* max-width: 30rem; */
   flex: 1 0 29%;
 }
 

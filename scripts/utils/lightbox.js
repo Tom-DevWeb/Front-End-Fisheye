@@ -17,18 +17,18 @@ class Lightbox {
 
   createLightbox(index) {
     const lightboxCreate = `
-        <button onclick="lightbox.closeLightbox()" class="lightbox-close" tabindex="0">
+        <button onclick="lightbox.closeLightbox()" class="lightbox-close">
         <span class="sr-only">Fermer le caroussel</span>
         </button>
         <div class="lightbox">
-        <button class="lightbox-prev" onclick="lightbox.prevMedia()" tabindex="0">
+        <button class="lightbox-prev" onclick="lightbox.prevMedia()">
             <span class="sr-only">Image précédente</span>
         </button>
         <div class="lightbox-media">
             <div class="lightbox-img"></div>
-            <h2 class="lightbox-title">${Lightbox.data[index].title}</h2>
+            <h2 class="lightbox-title"></h2>
         </div>
-        <button class="lightbox-next" onclick="lightbox.nextMedia()" tabindex="0">
+        <button class="lightbox-next" onclick="lightbox.nextMedia()">
             <span class="sr-only">Image suivante</span>
         </button>
         </div>
@@ -49,6 +49,9 @@ class Lightbox {
     this.$mainDom.setAttribute('aria-hidden', 'true')
 
     this.$body.classList.add('no-scroll')
+
+    const closeBtn = document.querySelector('.lightbox-close')
+    closeBtn.focus()
   }
 
   closeLightbox() {
@@ -66,24 +69,55 @@ class Lightbox {
     this.$mainDom.setAttribute('aria-hidden', 'false')
 
     // --> Enlève les event key aux éléments
-    document.removeEventListener('keyup', this.keyUpHandler)
+    document.removeEventListener('keydown', this.keyUpHandler)
   }
 
   handleKeyPress(e) {
     // ==> Gère la fermeture du modal avec la touche echap
     const $lightbox = document.querySelector('.lightbox-container')
+    const focusElements = $lightbox.querySelectorAll('button')
+    const focusElementsArray = Array.from(focusElements)
+
+    const firstFocusElement = focusElementsArray[0]
+    const lastFocusElement = focusElementsArray[focusElementsArray.length - 1]
+
     if (
       $lightbox.getAttribute('aria-hidden') === 'false' &&
       e.key === 'Escape'
     ) {
       this.closeLightbox()
+      e.preventDefault()
     } else if (e.key === 'ArrowRight') {
       this.nextMedia()
+      e.preventDefault()
     } else if (e.key === 'ArrowLeft') {
       this.prevMedia()
+      e.preventDefault()
+    } else if (e.key === 'Tab' || e.keyCode === 9) {
+      // console.log('Tab')
+      if (e.shiftKey) {
+        // console.log('Shift Tab')
+        // Si Maj + Tab, déplacez le focus de l'élément actuel vers le dernier élément focusable
+        //  --> document.activeElement est l'élément avec le focus à linstant T
+        if (document.activeElement === firstFocusElement) {
+          e.preventDefault()
+          lastFocusElement.focus()
+          // console.log('last')
+        }
+      } else {
+        // Sinon, déplacez le focus de l'élément actuel vers le premier élément focusable
+        //  --> document.activeElement est l'élément avec le focus à linstant T
+        if (document.activeElement === lastFocusElement) {
+          e.preventDefault()
+          firstFocusElement.focus()
+          // console.log('first')
+        }
+      }
     } else {
+      if (e.key === 'Enter') return
       //  --> Désactive les événement pour les autres touches
       e.preventDefault()
+      // console.log('test')
     }
   }
 
@@ -105,7 +139,7 @@ class Lightbox {
     this.createLightbox(searchIndex)
 
     // --> Rattache les event key aux éléments
-    document.addEventListener('keyup', this.keyUpHandler)
+    document.addEventListener('keydown', this.keyUpHandler)
   }
 
   prevMedia() {
@@ -116,7 +150,7 @@ class Lightbox {
       this._index = this._indexLenght - 1
     }
     setTimeout(() => {
-      this.createLightbox(this._index)
+      this.createMediaFormat(this._index)
     }, 100)
   }
 
@@ -128,11 +162,14 @@ class Lightbox {
       this._index = 0
     }
     setTimeout(() => {
-      this.createLightbox(this._index)
+      this.createMediaFormat(this._index)
     }, 100)
   }
 
   createMediaFormat(index) {
+    const $lightboxTitle = document.querySelector('.lightbox-title')
+    $lightboxTitle.textContent = Lightbox.data[index].title
+
     const $lightboxIMG = document.querySelector('.lightbox-img')
     $lightboxIMG.innerHTML = ''
     let format = Lightbox.data[index].formatPicture

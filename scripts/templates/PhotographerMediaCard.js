@@ -60,7 +60,10 @@ class PhotographerMediaCard {
           <p class="media-card__counterLike" id="nbrLike${this._likeId}">${
       photographer.likes
     }</p>
-          <label for="like${this._likeId}" class="media-card__label" >
+          <label for="like${this._likeId}" 
+          class="media-card__label" 
+          tabindex="0"
+          >
           
             <input 
               type="checkbox" 
@@ -94,7 +97,6 @@ class PhotographerMediaCard {
       image.addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
           lightbox.listenerLightbox(image)
-        } else {
           e.preventDefault
         }
       })
@@ -116,10 +118,13 @@ class PhotographerMediaCard {
 
   createLikes(index) {
     // console.log(element)
-    let $inputliked = document.getElementById(`like${index}`)
+    const $inputliked = document.getElementById(`like${index}`)
     const $likeTextContent = document.getElementById(`nbrLike${index}`)
     if (this._arrayStorage.includes(this._photographer[index].id)) {
-      // --> Car inputliked.checked = true ne fonctionne pas
+      // --> inputliked.checked pas pris en compte suite du code
+      // $inputliked.checked = true
+      // console.log($inputliked.checked)
+
       $inputliked.setAttribute('checked', 'checked')
       this.addLike($likeTextContent)
     }
@@ -129,32 +134,11 @@ class PhotographerMediaCard {
     const displayNewTotalLikes = new PhotographerInfo()
     // --> Cible les label like du DOM
     const $updateLike = document.querySelectorAll('.media-card__label')
-    $updateLike.forEach((e, index) => {
-      // --> Cible le conteneur nombre like 1 media
-      const $likeTextContent = document.getElementById(`nbrLike${index}`)
-      // --> Au changement de la checkbox
-      e.addEventListener('change', () => {
-        // --> Si le media deja like enlever du storage
-        if (this._arrayStorage.includes(this._photographer[index].id)) {
-          const indexToRemove = this._arrayStorage.indexOf(
-            this._photographer[index].id
-          )
-          this._arrayStorage.splice(indexToRemove, 1)
-          this.removeLike($likeTextContent)
-          displayNewTotalLikes.updateInfo(this.totalLikes)
-          // --> Sinon rajouter dans storage
-        } else {
-          this._arrayStorage.push(this._photographer[index].id)
-          this.addLike($likeTextContent)
-          displayNewTotalLikes.updateInfo(this.totalLikes)
-        }
-        // --> MAJ du local storage
-        localStorage.setItem(
-          this._localStorageKey,
-          JSON.stringify(this._arrayStorage)
-        )
-      })
+    $updateLike.forEach((label, index) => {
+      this.toggleCheckbox(label, index, displayNewTotalLikes)
+      this.enterCheckbox(label, index, displayNewTotalLikes)
     })
+
     //  --> Changement du conteneur total like
     displayNewTotalLikes.updateInfo(this.totalLikes)
   }
@@ -169,5 +153,72 @@ class PhotographerMediaCard {
     let plusNbr = Number(numberLike.textContent) - 1
     this._totalLikes--
     numberLike.textContent = `${plusNbr}`
+  }
+
+  // -----------------------------------------------------------------------------------
+  // ==> Pour changer le like avec le click
+  // -----------------------------------------------------------------------------------
+  toggleCheckbox(label, index, displayNewTotalLikes) {
+    // --> Cible le conteneur nombre like 1 media
+    const $likeTextContent = document.getElementById(`nbrLike${index}`)
+
+    // --> Au changement de la checkbox
+    label.addEventListener('change', () => {
+      // --> Si le media deja like enlever du storage
+      if (this._arrayStorage.includes(this._photographer[index].id)) {
+        const indexToRemove = this._arrayStorage.indexOf(
+          this._photographer[index].id
+        )
+        this._arrayStorage.splice(indexToRemove, 1)
+        this.removeLike($likeTextContent)
+        displayNewTotalLikes.updateInfo(this.totalLikes)
+
+        // --> Sinon rajouter dans storage
+      } else {
+        this._arrayStorage.push(this._photographer[index].id)
+        this.addLike($likeTextContent)
+        displayNewTotalLikes.updateInfo(this.totalLikes)
+      }
+
+      // --> MAJ du local storage
+      localStorage.setItem(
+        this._localStorageKey,
+        JSON.stringify(this._arrayStorage)
+      )
+    })
+  }
+
+  // -----------------------------------------------------------------------------------
+  // ==> Pour changer le like avec entrer
+  // -----------------------------------------------------------------------------------
+  enterCheckbox(label, index, displayNewTotalLikes) {
+    const $checkbox = document.getElementById(`like${index}`)
+    // console.log($checkbox)
+    // console.log($checkbox.checked)
+    const $likeTextContent = document.getElementById(`nbrLike${index}`)
+    label.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        $checkbox.checked = !$checkbox.checked
+        e.preventDefault()
+        if ($checkbox.checked) {
+          this._arrayStorage.push(this._photographer[index].id)
+          this.addLike($likeTextContent)
+          displayNewTotalLikes.updateInfo(this.totalLikes)
+        } else {
+          const indexToRemove = this._arrayStorage.indexOf(
+            this._photographer[index].id
+          )
+          this._arrayStorage.splice(indexToRemove, 1)
+          this.removeLike($likeTextContent)
+          displayNewTotalLikes.updateInfo(this.totalLikes)
+        }
+      }
+
+      // --> MAJ du local storage
+      localStorage.setItem(
+        this._localStorageKey,
+        JSON.stringify(this._arrayStorage)
+      )
+    })
   }
 }
