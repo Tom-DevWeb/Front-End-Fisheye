@@ -29,17 +29,17 @@ class MediaFilter {
                 <span class="filter-arrow"></span>
         </button>
         <ul class="filter-dropdown" role="listbox" id="filter-dropdown">
-            <li role="option">
+            <li role="option" tabindex="0">
                 <input type="radio" id="filter-popularity" name="chooce-filter" />
-                <label for="filter-popularity" class="filter-option" tabindex="0">Popularité</label>
+                <label for="filter-popularity" class="filter-option" >Popularité</label>
             </li>
-            <li role="option">
+            <li role="option" tabindex="0">
                 <input type="radio" id="filter-date" name="chooce-filter" />
-                <label for="filter-date" class="filter-option" tabindex="0">Date</label>
+                <label for="filter-date" class="filter-option" >Date</label>
             </li>
-            <li role="option">
+            <li role="option" tabindex="0">
                 <input type="radio" id="filter-title" name="chooce-filter" />
-                <label for="filter-title" class="filter-option" tabindex="0">Titre</label>
+                <label for="filter-title" class="filter-option" >Titre</label>
             </li>
         </ul>
     </div>

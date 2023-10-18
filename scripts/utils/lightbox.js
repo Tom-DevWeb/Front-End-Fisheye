@@ -21,16 +21,16 @@ class Lightbox {
         <span class="sr-only">Fermer le caroussel</span>
         </button>
         <div class="lightbox">
-        <button class="lightbox-prev" onclick="lightbox.prevMedia()">
-            <span class="sr-only">Image précédente</span>
-        </button>
-        <div class="lightbox-media">
-            <div class="lightbox-img"></div>
-            <h2 class="lightbox-title"></h2>
-        </div>
-        <button class="lightbox-next" onclick="lightbox.nextMedia()">
-            <span class="sr-only">Image suivante</span>
-        </button>
+          <button class="lightbox-prev" onclick="lightbox.prevMedia()">
+              <span class="sr-only">Image précédente</span>
+          </button>
+          <div class="lightbox-media">
+              <div class="lightbox-img"></div>
+              <h2 class="lightbox-title"></h2>
+          </div>
+          <button class="lightbox-next" onclick="lightbox.nextMedia()">
+              <span class="sr-only">Image suivante</span>
+          </button>
         </div>
     `
 

@@ -524,11 +524,7 @@
 .no-scroll {
   overflow: hidden;
 }
-@media screen and (max-width: 2024px) {
-  body {
-    padding: 0 6rem;
-  }
-}
+
 @media screen and (max-width: 1024px) {
   body {
     padding: 0 5rem;
