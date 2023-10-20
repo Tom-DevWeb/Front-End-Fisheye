@@ -33,7 +33,7 @@ class PhotographerMediaCard {
 
   createMedia(photographer) {
     const mediaCard = `
-      <div class="media-card" >
+      <article class="media-card" >
         ${
           photographer.formatPicture === 'image'
             ? `<img
@@ -47,7 +47,6 @@ class PhotographerMediaCard {
             src="${photographer.picture}" 
             tabindex="0"
             class="media-card__img"
-            alt="Vidéo ${photographer.title}"
             onclick="lightbox.listenerLightbox(this)"
              autoplay>
               Votre navigateur ne permet pas de lire les vidéos.
@@ -56,7 +55,7 @@ class PhotographerMediaCard {
           </video>`
         }
         
-        <section class="media-card__text">
+        <div class="media-card__text">
           <h3 class="media-card__title">${photographer.title}</h3>
           <p class="media-card__counterLike" 
             id="nbrLike${this._likeId}">
@@ -71,12 +70,12 @@ class PhotographerMediaCard {
               type="checkbox" 
               id="like${this._likeId}" 
               class="media-card__checkbox" />
-            <p class="media-card__btnLike" role="button">
+            <span class="media-card__btnLike" role="button">
               <span class="sr-only">Boutton pour ajouter ou enlever un like</span>
-            </p>
+            </span>
           </label>
-        </section>
-    </div>
+        </div>
+    </article>
             
             `
     this.$mediaContainer.innerHTML += mediaCard
