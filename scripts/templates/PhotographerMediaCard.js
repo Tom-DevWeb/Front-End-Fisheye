@@ -31,61 +31,9 @@ class PhotographerMediaCard {
     return this._totalLikes
   }
 
-  createMedia(photographer) {
-    const mediaCard = `
-      <article class="media-card" >
-        ${
-          photographer.formatPicture === 'image'
-            ? `<img
-            src="${photographer.picture}"
-            alt="Photo ${photographer.title}"
-            class="media-card__img"
-            tabindex="0"
-            onclick="lightbox.listenerLightbox(this)"
-            />`
-            : `<video 
-            src="${photographer.picture}" 
-            tabindex="0"
-            class="media-card__img"
-            onclick="lightbox.listenerLightbox(this)"
-             autoplay>
-              Votre navigateur ne permet pas de lire les vidéos.
-              Mais vous pouvez toujours
-              <a href="${photographer.picture}">la télécharger</a> !
-          </video>`
-        }
-        
-        <div class="media-card__text">
-          <h3 class="media-card__title">${photographer.title}</h3>
-          <p class="media-card__counterLike" 
-            id="nbrLike${this._likeId}">
-              ${photographer.likes} 
-          </p>
-          <label for="like${this._likeId}" 
-          class="media-card__label" 
-          tabindex="0"
-          >
-          
-            <input 
-              type="checkbox" 
-              id="like${this._likeId}" 
-              class="media-card__checkbox" />
-            <span class="media-card__btnLike" role="button">
-              <span class="sr-only">Boutton pour ajouter ou enlever un like</span>
-            </span>
-          </label>
-        </div>
-    </article>
-            
-            `
-    this.$mediaContainer.innerHTML += mediaCard
-
-    return this.$mediaContainer
-  }
-
   createAllMedia() {
     this._photographer.forEach((element, index) => {
-      this.createMedia(element)
+      new MediaFactory(element, element.formatPicture, this._likeId)
 
       this._likeId++
       this._totalLikes += element.likes

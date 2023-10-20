@@ -4,7 +4,7 @@
 class PhotographersFactory {
   constructor(data, type) {
     if (type === 'photographers') {
-      console.log(data)
+      // console.log(data)
       const PhotographerData = data.photographers.map((data) => {
         return new PhotographerProfil(data)
       })
