@@ -1,4 +1,4 @@
-# Base de code du projet P6 - Parcours Front-end
+# Projet 6 - FishEye - Parcours Développeur d"application React/JS
 
 ## Démarrer le projet
 
